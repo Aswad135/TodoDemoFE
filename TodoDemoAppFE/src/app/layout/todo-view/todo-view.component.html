@@ -1,0 +1,45 @@
+<div class="demo-button-container">
+  <button mat-raised-button (click)="addTodo()" class="demo-button">
+    Add data
+  </button>
+  <button
+    mat-raised-button
+    (click)="removeTodo()"
+    class="demo-button">
+    Remove data
+  </button>
+  <mat-icon
+    *ngIf="todoList.listHash"
+    (click)="copyCode()"
+    class="demo-button">
+    content_copy
+  </mat-icon>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID.</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="contents">
+    <th mat-header-cell *matHeaderCellDef>Content</th>
+    <td mat-cell *matCellDef="let element">{{element.contents}}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="createdOn">
+    <th mat-header-cell *matHeaderCellDef>Created On</th>
+    <td mat-cell *matCellDef="let element">{{element.createdOn}}</td>
+  </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="modifiedOn">
+    <th mat-header-cell *matHeaderCellDef>Modified On</th>
+    <td mat-cell *matCellDef="let element">{{element.modifiedOn}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
