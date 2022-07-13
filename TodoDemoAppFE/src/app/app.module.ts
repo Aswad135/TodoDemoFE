@@ -15,6 +15,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -22,18 +24,20 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     TodoListViewComponent,
     TodoViewComponent
   ],
-    imports: [
-        BrowserModule,
-        MatButtonModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        HttpClientModule,
-        ClipboardModule,
-        MatIconModule,
-        FormsModule,
-        MatCheckboxModule,
-    ],
+  imports: [
+    BrowserModule,
+    MatButtonModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    HttpClientModule,
+    ClipboardModule,
+    MatIconModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   providers: [HttpService, ApiService],
   bootstrap: [AppComponent]
 })

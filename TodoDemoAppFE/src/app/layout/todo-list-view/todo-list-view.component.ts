@@ -13,6 +13,7 @@ export class TodoListViewComponent implements OnInit {
   datasource: TodoListModel[] = [];
   displayedColumns: string[] = ['id', 'title', 'listHash'];
   dataToDisplay = [...this.datasource];
+  listTitle: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {
   }
@@ -22,7 +23,12 @@ export class TodoListViewComponent implements OnInit {
   }
 
   addData() {
-
+    this.apiService.createNewTodo({
+      title: this.listTitle
+    }).subscribe(value => {
+      if (value)
+        this.loadData();
+    })
   }
 
   removeData() {

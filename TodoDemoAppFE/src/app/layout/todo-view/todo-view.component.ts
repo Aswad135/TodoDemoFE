@@ -38,14 +38,14 @@ export class TodoViewComponent implements OnInit, OnDestroy {
 
 
   addTodo() {
-    if (this.newTodo != '')
+    if (this.newTodo != '' && this.todoList.listOfTodos)
       this.todoList.listOfTodos.push({
         contents: this.newTodo,
         isDone: false
       })
     this.apiService.createNewTodo(this.todoList).subscribe(value => {
       this.todoList = value;
-      this.dataSource = this.todoList ? this.todoList.listOfTodos : [];
+      this.dataSource = this.todoList ? this.todoList.listOfTodos ? this.todoList.listOfTodos : [] : [];
       this.newTodo = '';
     })
   }
@@ -63,7 +63,9 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   }
 
   copyCode() {
-    this.clipboardApi.copyFromContent(this.todoList.listHash);
+    if (this.todoList.listHash != null) {
+      this.clipboardApi.copyFromContent(this.todoList.listHash);
+    }
     this.snackBar.open('Sharable Code Copied to Clipboard', 'Close', {
       duration: 2000
     })
@@ -72,7 +74,7 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   private loadData(listHash: string) {
     this.apiService.getTodoOfList(listHash).subscribe(value => {
       this.todoList = value;
-      this.dataSource = this.todoList.listOfTodos;
+      this.dataSource = this.todoList.listOfTodos ? this.todoList.listOfTodos : [];
     })
   }
 }
