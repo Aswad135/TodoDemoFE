@@ -8,7 +8,6 @@ import {environment} from "../../environments/environment";
 })
 export class HttpService {
 
-  private baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -28,6 +27,10 @@ export class HttpService {
 
   put(url: string, params?: any[], headers?: any) {
     return this.httpClient.put(url, params, headers)
+  }
+
+  delete(url: string, params?: number) {
+    return this.httpClient.delete(url + params)
   }
 
   //Wrote method for error handling to be used in future IA

@@ -20,6 +20,7 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   dataSource: TodoModel[] = [];
   displayedColumns: string[] = ['id', 'contents', 'createdOn', 'modifiedOn'];
   temp: any;
+  newTodo: string = '';
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private clipboardApi: ClipboardService, private snackBar: MatSnackBar) {
     this.temp = this.route.queryParams.subscribe(params => {
@@ -37,11 +38,27 @@ export class TodoViewComponent implements OnInit, OnDestroy {
 
 
   addTodo() {
-
+    if (this.newTodo != '')
+      this.apiService.createNewTodo({
+        id: 0,
+        modifiedOn: new Date(),
+        listHash: this.todoList,
+        contents: this.newTodo,
+        isDone: false,
+        createdOn: new Date()
+      }).subscribe(value => {
+        this.todoList.ListOfTodos.push(value);
+      })
   }
 
   removeTodo() {
-
+    let checkedSources = this.dataSource.filter(value => value.isDone);
+    checkedSources.forEach(x => {
+      this.apiService.deleteTodo(x).subscribe(res => {
+        if (res)
+          this.dataSource = this.dataSource.filter(x => x.id == x.id);
+      })
+    })
   }
 
   copyCode() {

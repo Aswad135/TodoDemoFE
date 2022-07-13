@@ -1,17 +1,16 @@
 <div class="demo-button-container">
+  <input type="text" name="newTodo" id="newTodo" [(ngModel)]="newTodo">
   <button mat-raised-button (click)="addTodo()" class="demo-button">
     Add data
   </button>
   <button
     mat-raised-button
-    (click)="removeTodo()"
-    class="demo-button">
-    Remove data
+    (click)="removeTodo()">
+    Remove Checked Todos
   </button>
   <mat-icon
     *ngIf="todoList.listHash"
-    (click)="copyCode()"
-    class="demo-button">
+    (click)="copyCode()">
     content_copy
   </mat-icon>
 </div>
@@ -43,3 +42,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+

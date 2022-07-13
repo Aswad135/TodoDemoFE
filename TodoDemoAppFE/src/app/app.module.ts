@@ -13,6 +13,7 @@ import {ApiService} from "./services/api.service";
 import {ClipboardModule} from "ngx-clipboard";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,16 +21,17 @@ import {MatButtonModule} from "@angular/material/button";
     TodoListViewComponent,
     TodoViewComponent
   ],
-  imports: [
-    BrowserModule,
-    MatButtonModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    HttpClientModule,
-    ClipboardModule,
-    MatIconModule,
-  ],
+    imports: [
+        BrowserModule,
+        MatButtonModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        HttpClientModule,
+        ClipboardModule,
+        MatIconModule,
+        FormsModule,
+    ],
   providers: [HttpService, ApiService],
   bootstrap: [AppComponent]
 })
