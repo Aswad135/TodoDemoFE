@@ -4,6 +4,6 @@ export interface TodoListModel{
   id:number,
   title: string,
   listHash: string;
-  ListOfTodos: TodoModel[];
+  listOfTodos: TodoModel[];
 
 }

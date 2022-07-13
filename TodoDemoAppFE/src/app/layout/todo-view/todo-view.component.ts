@@ -16,7 +16,7 @@ import {Overlay} from "@angular/cdk/overlay";
 export class TodoViewComponent implements OnInit, OnDestroy {
 
   listHash: string = '';
-  todoList: TodoListModel = {ListOfTodos: [], id: 0, listHash: "", title: ""};
+  todoList: TodoListModel = {listOfTodos: [], id: 0, listHash: "", title: ""};
   dataSource: TodoModel[] = [];
   displayedColumns: string[] = ['id', 'contents', 'createdOn', 'modifiedOn'];
   temp: any;
@@ -40,14 +40,10 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   addTodo() {
     if (this.newTodo != '')
       this.apiService.createNewTodo({
-        id: 0,
-        modifiedOn: new Date(),
-        listHash: this.todoList,
         contents: this.newTodo,
-        isDone: false,
-        createdOn: new Date()
+        isDone: false
       }).subscribe(value => {
-        this.todoList.ListOfTodos.push(value);
+        this.todoList.listOfTodos.push(value);
       })
   }
 
@@ -71,7 +67,7 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   private loadData(listHash: string) {
     this.apiService.getTodoOfList(listHash).subscribe(value => {
       this.todoList = value;
-      this.dataSource = this.todoList.ListOfTodos;
+      this.dataSource = this.todoList.listOfTodos;
     })
   }
 }
