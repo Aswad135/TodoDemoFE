@@ -18,7 +18,7 @@ export class TodoViewComponent implements OnInit, OnDestroy {
   listHash: string = '';
   todoList: TodoListModel = {listOfTodos: [], id: 0, listHash: "", title: ""};
   dataSource: TodoModel[] = [];
-  displayedColumns: string[] = ['id', 'contents', 'createdOn', 'modifiedOn'];
+  displayedColumns: string[] = ['id', 'checked', 'contents', 'createdOn', 'modifiedOn'];
   temp: any;
   newTodo: string = '';
 
@@ -39,22 +39,27 @@ export class TodoViewComponent implements OnInit, OnDestroy {
 
   addTodo() {
     if (this.newTodo != '')
-      this.apiService.createNewTodo({
+      this.todoList.listOfTodos.push({
         contents: this.newTodo,
         isDone: false
-      }).subscribe(value => {
-        this.todoList.listOfTodos.push(value);
       })
+    this.apiService.createNewTodo(this.todoList).subscribe(value => {
+      this.todoList = value;
+      this.dataSource = this.todoList ? this.todoList.listOfTodos : [];
+      this.newTodo = '';
+    })
   }
 
   removeTodo() {
     let checkedSources = this.dataSource.filter(value => value.isDone);
     checkedSources.forEach(x => {
-      this.apiService.deleteTodo(x).subscribe(res => {
+      // @ts-ignore
+      this.apiService.deleteTodo(x.id).subscribe(res => {
         if (res)
           this.dataSource = this.dataSource.filter(x => x.id == x.id);
       })
     })
+    this.loadData(this.listHash);
   }
 
   copyCode() {

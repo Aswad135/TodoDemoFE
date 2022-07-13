@@ -3,6 +3,7 @@ import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {HttpService} from "./http.service";
 import {TodoModel} from "../models/todo.model";
+import {TodoListModel} from "../models/todo-list.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,13 @@ export class ApiService {
     return this.httpService.get(this.apiUrl + 'todoList/listHash', params, httpOptions)
   }
 
-  createNewTodo(todo: TodoModel) {
+  createNewTodo(todo: TodoListModel) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
-    return this.httpService.post(this.apiUrl + 'todo', todo, httpOptions)
+    return this.httpService.post(this.apiUrl + 'todoList/list', todo, httpOptions)
   }
 
   updateTodoStatus(todo: TodoModel) {
@@ -51,7 +52,15 @@ export class ApiService {
     return this.httpService.put(this.apiUrl + 'todo', [todo], httpOptions)
   }
 
-  deleteTodo(todo: TodoModel) {
-    return this.httpService.delete(this.apiUrl + 'todo/delete/', todo.id)
+  deleteTodo(todo: number | undefined) {
+    if (todo == undefined)
+      return null;
+    const params = new HttpParams().append('id', todo);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.httpService.get(this.apiUrl + 'todo/delete', params, httpOptions)
   }
 }

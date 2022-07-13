@@ -28,10 +28,6 @@ export class HttpService {
     return this.httpClient.put(url, params, headers)
   }
 
-  delete(url: string, params?: number) {
-    return this.httpClient.delete(url + params)
-  }
-
   //Wrote method for error handling to be used in future IA
   private errorResponseHandler(response: any) {
     const error = response.error;

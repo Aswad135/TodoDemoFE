@@ -14,6 +14,7 @@ import {ClipboardModule} from "ngx-clipboard";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {FormsModule} from "@angular/forms";
         ClipboardModule,
         MatIconModule,
         FormsModule,
+        MatCheckboxModule,
     ],
   providers: [HttpService, ApiService],
   bootstrap: [AppComponent]
